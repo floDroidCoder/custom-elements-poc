@@ -1,0 +1,14 @@
+div.apps {
+    display: flex;
+}
+
+div.apps > div.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: blue;
+    color: white;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+}

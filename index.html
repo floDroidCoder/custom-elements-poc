@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello, DPI!</title>
+    <base href="/">
+    <style>
+      html, body { display: flex; flex: 1 1 auto; height: 100%; margin: 0; }
+      patient-selector { width: 15%; border: dashed 5px yellow; padding: 10px; }
+      div.container { flex: 1; display: flex; flex-direction: column; margin-left: 10px; }
+      div.container > app-container { flex: 1; border: dashed 5px green; padding: 10px;}
+      div.container > app-selector { border: dashed 5px red; padding: 10px; margin-top: 10px;}
+    </style>
+  </head>
+  <body>
+
+    <patient-selector></patient-selector>
+    <div class="container">
+      <app-container></app-container>
+      <app-selector></app-selector>
+    </div>
+
+    <script src="./patient-selector/elements/patient-selector.js"></script>
+    <script src="./app-container/elements/app-container.js"></script>
+    <script src="./app-selector/dist/app-selector.js"></script>
+  </body>
+</html>
