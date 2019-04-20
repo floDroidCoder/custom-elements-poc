@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-container',
@@ -9,26 +8,26 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 
-  public patientId: string;
-  public app: string;
+  public selectedPatient: any;
+  public selectedApp: any;
 
-  constructor(
-    private route: ActivatedRoute,
-  ) {
-    window.addEventListener('hashchange', this.hashChange.bind(this), false);
+  constructor(private router: Router) {
+    window.addEventListener('patientChange', this.patientChange, false);
+    window.addEventListener('appChange', this.appChange, false);
   }
 
   public ngOnInit() {
-    this.route.queryParams
-      .pipe(filter((params) => params.patient || params.app))
-      .subscribe((params) => {
-        console.log('selected patient changed with angular router');
-        this.patientId = params.patient;
-        this.app = params.app;
-      });
   }
 
-  private hashChange() {
-    console.log('selected patient changed with eventListner');
-  }
+  private patientChange = event => {
+    this.selectedPatient = event.detail;
+  };
+
+  private appChange = event => {
+    this.selectedApp = event.detail;
+  };
+
+  public navigateTo = path => this.router.navigate(path, {
+    queryParamsHandling: 'merge',
+  })
 }

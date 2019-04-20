@@ -1,11 +1,11 @@
 <h1>Welcome to App Container</h1>
 <div>
-  Patient selected : {{patientId}} <br>
-  App selected : {{app}} <br>
+  <p>Patient selected : {{selectedPatient?.id}} --> {{selectedPatient?.firstName}}</p>
+  <p>App selected : {{selectedApp?.label}} </p>
 </div>
 <br>
 <div>
-  <button type="button" [routerLink]="'/public'">Public</button>
-  <button type="button" [routerLink]="'/private'">Private</button>
+  <button type="button" [routerLink]="'/public'" queryParamsHandling="merge">Public</button>
+  <button type="button" [routerLink]="'/private'" queryParamsHandling="merge">Private</button>
 </div>
 <router-outlet></router-outlet>

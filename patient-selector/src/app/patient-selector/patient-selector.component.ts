@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'patient-selector',
@@ -7,8 +8,7 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
   styleUrls: ['./patient-selector.component.scss'],
   encapsulation: ViewEncapsulation.Native
 })
-export class PatientSelectorComponent implements OnInit {
-
+export class PatientSelectorComponent implements OnInit, AfterViewInit {
   public selectedPatient: any;
   public patients: any[] = [{
     id: '1',
@@ -38,10 +38,18 @@ export class PatientSelectorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      if (params && params.patient) {
-        const pat = this.patients.find((p) => p.id === params.patient);
-        this.selectedPatient = pat ? pat : null;
+      const patientIdFromUrl = _.get(params, 'patient');
+      if (patientIdFromUrl) {
+        const pat = this.patients.find((p) => p.id === patientIdFromUrl);
+        this.selectedPatient = pat || null;
+
+        // Wait until app-container is loaded
+        setTimeout(() => this.dispatchPatient(this.selectedPatient), 1000);
       }
     });
   }
@@ -53,6 +61,10 @@ export class PatientSelectorComponent implements OnInit {
       queryParams: { patient: patient.id },
       queryParamsHandling: 'merge',
     });
+
+    this.dispatchPatient(patient);
   }
 
+  private dispatchPatient =
+      patient => window.dispatchEvent(new CustomEvent('patientChange', {'detail': patient}));
 }

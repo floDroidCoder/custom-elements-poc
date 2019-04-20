@@ -12,34 +12,8 @@ import '@stencil/core';
 
 export namespace Components {
 
-  interface AppSelector {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
-  interface AppSelectorAttributes extends StencilHTMLAttributes {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
+  interface AppSelector {}
+  interface AppSelectorAttributes extends StencilHTMLAttributes {}
 }
 
 declare global {

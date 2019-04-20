@@ -14,7 +14,7 @@ cd app-container && npm install && npm run build:element
 cd ..
 cd app-selector && npm install && npm run build
 cd .. 
-cd patient-selector && npm install && build:prod
+cd patient-selector && npm install && npm run build:prod
 cd ..
 
 npm start
